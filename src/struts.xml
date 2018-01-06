@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 设置上传文件的大小(单位是字节) -->
+	<!-- <constant name="struts.multipart.maxSize" value="2097152"></constant> -->
+	<package name="demo1" extends="struts-default" namespace="/">
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="loginsuccess">/index.htm</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="customer_*" class="com.zcy.action.CustomerAction" method="{1}">
+			<!-- 添加-跳转到添加页面 -->
+			<result name="toAddPage">/jsp/customer/add.jsp</result>
+			<!-- 添加之后跳转 -->
+			<result name="add" type="redirectAction">customer_list</result>
+			<!-- 列表页面 -->
+			<result name="list">/jsp/customer/list.jsp</result>
+			<!-- 删除之后 -->
+			<result name="delete" type="redirectAction">customer_list</result>
+			<!-- 修改-跳转到修改页面 -->
+			<result name="showCustomer">/jsp/customer/edit.jsp</result>
+			<!-- 修改之后 -->
+			<result name="update" type="redirectAction">customer_list</result>
+			<!-- 显示分页数据 -->
+			<result name="listpage">/jsp/customer/listpage.jsp</result>
+			<!-- 条件查询 -->
+			<result name="listCondition">/jsp/customer/list.jsp</result>
+		</action>
+		
+		<action name="linkman_*" class="com.zcy.action.LinkManAction" method="{1}">
+			<!-- 添加联系人-到添加页面 -->
+			<result name="toAddPage">/jsp/linkman/add.jsp</result>
+			<!-- 添加联系人-保存 -->
+			<result name="addLinkMan">/jsp/success.jsp</result>
+			<!-- 配置input结果 -->
+			<result name="input">/jsp/error.jsp</result>
+		</action>
+	</package>
+
+</struts>
+
+
+
