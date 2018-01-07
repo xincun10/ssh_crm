@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
@@ -26,10 +28,10 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		this.customerService = customerService;
 	}
 	//模型驱动获取linkMan
-	private LinkMan linkMan = new LinkMan();
+	private LinkMan linkman = new LinkMan();
 	public LinkMan getModel() {
 		// TODO Auto-generated method stub
-		return linkMan;
+		return linkman;
 	}
 	
 	//实现文件上传
@@ -73,9 +75,38 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 			//把上传文件复制到服务器文件里面
 			FileUtils.copyFile(upload, serverFile);
 		}
-		linkManService.addLinkMan(linkMan);
+		linkManService.addLinkMan(linkman);
 		return "addLinkMan";
 	}
-	
+	//3.联系人列表的方法
+	public String list()
+	{
+		List<LinkMan> list = linkManService.listLinkMan();
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "list";
+	}
+	//4.到修改联系人页面
+	public String showLinkMan()
+	{
+		//使用模型驱动得到id值
+		int linkid = linkman.getLinkid();
+		//根据id值查询联系人
+		LinkMan link = linkManService.findOne(linkid);
+		//得到所有客户列表
+		List<Customer> listCustomer = customerService.findAll();
+		//把联系人和客户放到域对象里面
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("linkman", link);
+		request.setAttribute("listCustomer", listCustomer);
+		
+		return "showLinkMan";
+	}
+	//5.修改联系人
+	public String updateLinkMan()
+	{
+		//模型驱动获取联系人的值
+		linkManService.updateLinkMan(linkman);
+		return "updateLinkMan";
+	}
 	
 }

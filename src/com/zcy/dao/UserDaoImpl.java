@@ -29,5 +29,10 @@ public class UserDaoImpl implements UserDao {
 		}
 		return null;
 	}
+
+	//查询所有用户
+	public List<User> findAll() {
+		return (List<User>) this.hibernateTemplate.find("from User");
+	}
 	
 }

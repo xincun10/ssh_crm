@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<TITLE>联系人列表</TITLE> 
+<TITLE>拜访记录列表</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
@@ -24,7 +24,7 @@
 </HEAD>
 <BODY>
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/linkmanServlet?method=list"
+		action="${pageContext.request.contextPath }/visit_list.action"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -47,7 +47,7 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：联系人管理 &gt; 联系人列表</TD>
+								<TD class=manageHead>当前位置：拜访记录管理 &gt; 拜访记录列表</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -81,24 +81,22 @@
 											<TBODY>
 												<TR
 													style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
-													<TD>联系人名称</TD>
-													<TD>性别</TD>
-													<TD>办公电话</TD>
-													<TD>手机</TD>
-													<td>所属客户</td>
+													<TD>客户名称</TD>
+													<TD>用户名称</TD>
+													<TD>拜访地址</TD>
+													<TD>拜访内容</TD>
 													<TD>操作</TD>
 												</TR>
-												<c:forEach items="${list }" var="linkman">
+												<c:forEach items="${listVisit }" var="visit">
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD>${linkman.lkmName }</TD>
-													<TD>${linkman.lkmGender }</TD>
-													<TD>${linkman.lkmPhone }</TD>
-													<TD>${linkman.lkmMobile }</TD>
-													<td>${linkman.customer.custName }</td>
+													<TD>${visit.customer.custName }</TD>
+													<TD>${visit.user.username }</TD>
+													<TD>${visit.vaddress }</TD>
+													<TD>${visit.vcontent }</TD>
 													
 													<TD>
-													<a href="${pageContext.request.contextPath }/linkman_showLinkMan.action?linkid=${linkman.linkid}">修改</a>
+													<a href="${pageContext.request.contextPath }/visit_showVisit.action?vid=${visit.vid}">修改</a>
 													&nbsp;&nbsp;
 													<a href="${pageContext.request.contextPath }/linkman_delLinkan.action?linkid=${linkman.linkid}">删除</a>
 													</TD>

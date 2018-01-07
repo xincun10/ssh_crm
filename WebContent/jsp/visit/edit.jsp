@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<TITLE>添加联系人</TITLE> 
+<TITLE>修改拜访记录</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
@@ -15,9 +15,9 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/linkman_updateLinkMan.action"
+		action="${pageContext.request.contextPath }/visit_updateVisit.action"
 		method=post>
-		<input type="hidden" name="linkid" value="${linkman.linkid }"/>
+		<input type="hidden" name="vid" value="${visit.vid }"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -39,7 +39,7 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：联系人管理 &gt; 修改联系人</TD>
+								<TD class=manageHead>当前位置：拜访记录管理 &gt; 修改拜访记录</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -47,39 +47,37 @@
 						</TABLE>
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
-								<td>所属客户：</td>
+								<td>客户：</td>
 								<td colspan="3">
 									<select name="customer.cid">
 										<c:forEach items="${listCustomer }" var="customer">
-											<option value="${customer.cid }" <c:if test="${customer.cid == linkman.customer.cid }">selected</c:if>>
+											<option value="${customer.cid }" <c:if test="${customer.cid == visit.customer.cid }">selected</c:if>>
 											${customer.custName }</option>
 										</c:forEach>
 									</select>
 								</td>
 							</tr>
 							<TR>
-								<td>联系人名称：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmName" value="${linkman.lkmName}" >
-								</td>
-								<td>联系人性别：</td>
-								<td>
-								<input type="radio" value="男" name="lkmGender" <c:if test="${linkman.lkmGender=='男' }">checked</c:if>>男
-								
-								<input type="radio" value="女" name="lkmGender" <c:if test="${linkman.lkmGender=='女' }">checked</c:if>>女
+								<td>用户：</td>
+								<td colspan="3">
+									<select name="user.uid">
+										<c:forEach items="${listUser }" var="user">
+											<option value="${user.uid }" <c:if test="${user.uid == visit.user.uid }">selected</c:if>>
+											${user.username }</option>
+										</c:forEach>
+									</select>
 								</td>
 							</TR>
 							<TR>
-								<td>联系人办公电话 ：</td>
+								<td>拜访地址 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmPhone" value="${linkman.lkmPhone}">
+														style="WIDTH: 180px" maxLength=50 name="vaddress" value="${visit.vaddress}">
 								</td>
-								<td>联系人手机 ：</td>
+								<td>拜访内容 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmMobile" value="${linkman.lkmMobile}">
+														style="WIDTH: 180px" maxLength=50 name="vcontent" value="${visit.vcontent}">
 								</td>
 							</TR>
 							<tr>

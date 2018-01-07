@@ -27,6 +27,7 @@
 		<mapping resource="com/zcy/entity/User.hbm.xml"/>
 		<mapping resource="com/zcy/entity/Customer.hbm.xml"/>
 		<mapping resource="com/zcy/entity/LinkMan.hbm.xml"/>
+		<mapping resource="com/zcy/entity/Visit.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

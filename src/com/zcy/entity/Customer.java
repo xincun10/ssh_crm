@@ -13,12 +13,19 @@ public class Customer {
 	private String custMobile;
 	//表示所有的联系人
 	private Set<LinkMan> setLinkMan = new HashSet<LinkMan>();
-	
 	public Set<LinkMan> getSetLinkMan() {
 		return setLinkMan;
 	}
 	public void setSetLinkMan(Set<LinkMan> setLinkMan) {
 		this.setLinkMan = setLinkMan;
+	}
+	//表示所有的拜访记录
+	private Set<Visit> setCusVisit = new HashSet<Visit>();
+	public Set<Visit> getSetCusVisit() {
+		return setCusVisit;
+	}
+	public void setSetCusVisit(Set<Visit> setCusVisit) {
+		this.setCusVisit = setCusVisit;
 	}
 	public Integer getCid() {
 		return cid;

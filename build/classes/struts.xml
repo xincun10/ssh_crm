@@ -6,7 +6,7 @@
 	<!-- 设置上传文件的大小(单位是字节) -->
 	<!-- <constant name="struts.multipart.maxSize" value="2097152"></constant> -->
 	<package name="demo1" extends="struts-default" namespace="/">
-		<action name="user_*" class="userAction" method="{1}">
+		<action name="user_*" class="com.zcy.action.UserAction" method="{1}">
 			<result name="loginsuccess">/index.htm</result>
 			<result name="login">/login.jsp</result>
 		</action>
@@ -34,9 +34,28 @@
 			<!-- 添加联系人-到添加页面 -->
 			<result name="toAddPage">/jsp/linkman/add.jsp</result>
 			<!-- 添加联系人-保存 -->
-			<result name="addLinkMan">/jsp/success.jsp</result>
+			<result name="addLinkMan" type="redirectAction">linkman_list</result>
 			<!-- 配置input结果 -->
 			<result name="input">/jsp/error.jsp</result>
+			<!-- 联系人列表 -->
+			<result name="list">/jsp/linkman/list.jsp</result>
+			<!-- 到修改联系人页面 -->
+			<result name="showLinkMan">/jsp/linkman/edit.jsp</result>
+			<!-- 修改联系人 -->
+			<result name="updateLinkMan" type="redirectAction">linkman_list</result>
+		</action>
+		
+		<action name="visit_*" class="com.zcy.action.VisitAction" method="{1}">
+			<!-- 到添加拜访页面 -->
+			<result name="toAddPage">/jsp/visit/add.jsp</result>
+			<!-- 添加拜访记录 -->
+			<result name="addVisit">/jsp/success.jsp</result>
+			<!-- 显示拜访记录列表 -->
+			<result name="list">/jsp/visit/list.jsp</result>
+			<!-- 跳转到修改页面 -->
+			<result name="showVisit">/jsp/visit/edit.jsp</result>
+			<!-- 更新修改记录 -->
+			<result name="updateVisit" type="redirectAction">visit_list</result>
 		</action>
 	</package>
 

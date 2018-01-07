@@ -19,9 +19,15 @@
 		<property name="custMobile"></property>
 		
 		<!-- 表示客户所有联系人 -->
-		<set name="setLinkMan">
+		<set name="setLinkMan" inverse="true" cascade="delete">
 			<key column="clid"></key>
 			<one-to-many class="com.zcy.entity.LinkMan"/>
+		</set>
+		
+		<!-- 表示所有拜访记录 -->
+		<set name="setCusVisit">
+			<key column="cvid"></key>
+			<one-to-many class="com.zcy.entity.Visit"/>
 		</set>
 	</class>
 </hibernate-mapping>

@@ -18,8 +18,8 @@ public class LinkMan {
 	public Integer getLinkid() {
 		return linkid;
 	}
-	public void setLinkid(Integer linkId) {
-		this.linkid = linkId;
+	public void setLinkid(Integer linkid) {
+		this.linkid = linkid;
 	}
 	public String getLkmName() {
 		return lkmName;

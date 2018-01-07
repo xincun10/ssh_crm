@@ -165,7 +165,7 @@ A.active {
 												</TR>
 												<TR>
 													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/linkman_list.action"
-														target=main>－联系人列表</A></TD>
+														target=main>－ 联系人列表</A></TD>
 												</TR>
 												
 											</TBODY>
@@ -185,11 +185,11 @@ A.active {
 											cellPadding=2 width=155 align=center border=0>
 											<TBODY>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
+													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/visit_toAddPage.action"
 														target=main>－新增客户拜访</A></TD>
 												</TR>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
+													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/visit_list.action"
 														target=main>－客户拜访列表</A></TD>
 												</TR>
 												
