@@ -14,4 +14,6 @@ public interface LinkManDao {
 
 	void updateLinkMan(LinkMan linkman);
 
+	List<LinkMan> findCondition(LinkMan linkman);
+
 }

@@ -81,4 +81,9 @@ public class CustomerService {
 		// TODO Auto-generated method stub
 		return customerDao.findCondition(customer);
 	}
+
+	public List<Customer> findMoreCondition(Customer customer) {
+		// TODO Auto-generated method stub
+		return customerDao.findMoreCondition(customer);
+	}
 }

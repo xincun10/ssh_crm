@@ -34,6 +34,24 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		return linkman;
 	}
 	
+	//到查找联系人页面
+	public String toSelectPage()
+	{
+		//查询所有客户，把信息传递到页面下拉列表中
+		List<Customer> list = customerService.findAll();
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "toSelectPage";
+	}
+	
+	//多条件查询
+	public String moreCondition()
+	{
+		//调用方法得到条件查询结果
+		List<LinkMan> list = linkManService.findCondition(linkman);
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "moreCondition";
+	}
+	
 	//实现文件上传
 	//定义上传文件变量，变量名称需要是表单里面文件上传项的name值
 	private File upload;

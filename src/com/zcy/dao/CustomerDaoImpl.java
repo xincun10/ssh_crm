@@ -1,5 +1,6 @@
 package com.zcy.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -11,37 +12,37 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.zcy.entity.Customer;
 
-public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao {
+public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao {
 
 	//添加客户
-	public void add(Customer customer) {
-		this.getHibernateTemplate().save(customer);
-	}
+//	public void add(Customer customer) {
+//		this.getHibernateTemplate().save(customer);
+//	}
 
-	@SuppressWarnings("all")
-	public List<Customer> findAll() {
-		// TODO Auto-generated method stub
-		return (List<Customer>) this.getHibernateTemplate().find("from Customer");
-	}
+//	@SuppressWarnings("all")
+//	public List<Customer> findAll() {
+//		// TODO Auto-generated method stub
+//		return (List<Customer>) this.getHibernateTemplate().find("from Customer");
+//	}
 
 	//根据id查询
-	@Override
-	public Customer findOne(int cid) {
-		return this.getHibernateTemplate().get(Customer.class, cid);
-	}
+//	@Override
+//	public Customer findOne(int cid) {
+//		return this.getHibernateTemplate().get(Customer.class, cid);
+//	}
 
 	//删除用户
-	@Override
-	public void delete(Customer c) {
-		// TODO Auto-generated method stub
-		this.getHibernateTemplate().delete(c);
-	}
+//	@Override
+//	public void delete(Customer c) {
+//		// TODO Auto-generated method stub
+//		this.getHibernateTemplate().delete(c);
+//	}
 
 	//修改客户
-	public void update(Customer c) {
-		// TODO Auto-generated method stub
-		this.getHibernateTemplate().update(c);
-	}
+//	public void update(Customer c) {
+//		// TODO Auto-generated method stub
+//		this.getHibernateTemplate().update(c);
+//	}
 
 	//查询记录数
 	public int findCount() {
@@ -116,6 +117,57 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 		List<Customer> list = 
 				(List<Customer>) this.getHibernateTemplate().findByCriteria(criteria);
 		return list;
+	}
+
+	//多条件查询--拼接hql语句实现
+//	public List<Customer> findMoreCondition(Customer customer) {
+//		//使用hibernate模板里面find方法实现
+//		//拼接hql语句
+//		String hql = "from Customer where 1=1";
+//		//创建list集合
+//		List<Object> p = new ArrayList<Object>();
+//		//判断条件值是否为空，如果不为空拼接hql语句
+//		if(customer.getCustName()!=null && !"".equals(customer.getCustName()))
+//		{
+//			//拼接hql
+//			hql += " and custName=?";
+//			//把值设置到list里面
+//			p.add(customer.getCustName());
+//		}
+//		if(customer.getCustLevel()!=null && !"".equals(customer.getCustLevel()))
+//		{
+//			//拼接hql
+//			hql += " and custLevel=?";
+//			p.add(customer.getCustLevel());
+//		}
+//		if(customer.getCustSource()!=null && !"".equals(customer.getCustSource()))
+//		{
+//			//拼接hql
+//			hql += " and custSource=?";
+//			p.add(customer.getCustSource());
+//		}
+//		
+//		return (List<Customer>) this.getHibernateTemplate().find(hql, p.toArray());
+//	}
+	//使用离线对象方式实现多条件组合查询
+	public List<Customer> findMoreCondition(Customer customer) 
+	{
+		//创建离线对象，指定对哪个实体类进行操作
+		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
+		//判断条件值是否为空
+		if(customer.getCustName()!=null && !"".equals(customer.getCustName()))
+		{
+			criteria.add(Restrictions.eq("custName", customer.getCustName()));
+		}
+		if(customer.getCustLevel()!=null && !"".equals(customer.getCustLevel()))
+		{
+			criteria.add(Restrictions.eq("custLevel", customer.getCustLevel()));
+		}
+		if(customer.getCustSource()!=null && !"".equals(customer.getCustSource()))
+		{
+			criteria.add(Restrictions.eq("custSource", customer.getCustSource()));
+		}
+		return (List<Customer>) this.getHibernateTemplate().findByCriteria(criteria);
 	}
 
 }

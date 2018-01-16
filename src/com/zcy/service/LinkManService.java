@@ -35,5 +35,10 @@ public class LinkManService {
 		// TODO Auto-generated method stub
 		linkManDao.updateLinkMan(linkman);
 	}
+
+	public List<LinkMan> findCondition(LinkMan linkman) {
+		// TODO Auto-generated method stub
+		return linkManDao.findCondition(linkman);
+	}
 	
 }

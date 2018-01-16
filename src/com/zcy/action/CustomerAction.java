@@ -23,6 +23,20 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return customer;
 	}
 	
+	//到客户信息查询页面
+	public String toSelectCustomerPage()
+	{
+		return "toSelectCustomerPage";
+	}
+	
+	//多条件查询
+	public String moreCondition()
+	{
+		List<Customer> list = customerService.findMoreCondition(customer);
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "moreCondition";
+	}
+	
 	//1.到添加页面
 	public String toAddPage()
 	{

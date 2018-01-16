@@ -210,11 +210,11 @@ A.active {
 											cellPadding=2 width=155 align=center border=0>
 											<TBODY>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
+													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/customer_toSelectCustomerPage.action"
 														target=main>－ 客户信息查询</A></TD>
 												</TR>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
+													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/linkman_toSelectPage.action"
 														target=main>－ 联系人信息查询</A></TD>
 												</TR>
 												<TR>
