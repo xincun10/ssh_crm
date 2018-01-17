@@ -32,6 +32,11 @@
 			<result name="toSelectCustomerPage">/jsp/select/select.jsp</result>
 			<!-- 多条件查询结果 -->
 			<result name="moreCondition">/jsp/customer/list.jsp</result>
+			<!-- 统计分析 -->
+			<!-- 根据来源统计 -->
+			<result name="countSource">/jsp/customer/listSource.jsp</result>
+			<!-- 根据客户级别统计 -->
+			<result name="countLevel">/jsp/customer/listLevel.jsp</result>
 		</action>
 		
 		<action name="linkman_*" class="com.zcy.action.LinkManAction" method="{1}">

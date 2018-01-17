@@ -7,10 +7,18 @@ public class Customer {
 
 	private Integer cid;
 	private String custName;
-	private String custLevel;
+//	private String custLevel;
 	private String custSource;
 	private String custPhone;
 	private String custMobile;
+	//在客户实体类里面表示所属级别
+	private Dict dictCustLevel;	
+	public Dict getDictCustLevel() {
+		return dictCustLevel;
+	}
+	public void setDictCustLevel(Dict dictCustLevel) {
+		this.dictCustLevel = dictCustLevel;
+	}
 	//表示所有的联系人
 	private Set<LinkMan> setLinkMan = new HashSet<LinkMan>();
 	public Set<LinkMan> getSetLinkMan() {
@@ -39,12 +47,12 @@ public class Customer {
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-	public String getCustLevel() {
-		return custLevel;
-	}
-	public void setCustLevel(String custLevel) {
-		this.custLevel = custLevel;
-	}
+//	public String getCustLevel() {
+//		return custLevel;
+//	}
+//	public void setCustLevel(String custLevel) {
+//		this.custLevel = custLevel;
+//	}
 	public String getCustSource() {
 		return custSource;
 	}

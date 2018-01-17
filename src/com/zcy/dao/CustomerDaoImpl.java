@@ -1,16 +1,20 @@
 package com.zcy.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.zcy.entity.Customer;
+import com.zcy.entity.Dict;
 
 public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao {
 
@@ -159,15 +163,58 @@ public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDa
 		{
 			criteria.add(Restrictions.eq("custName", customer.getCustName()));
 		}
-		if(customer.getCustLevel()!=null && !"".equals(customer.getCustLevel()))
+		if(customer.getDictCustLevel().getDid()!=null && !"0".equals(customer.getDictCustLevel().getDid()))
 		{
-			criteria.add(Restrictions.eq("custLevel", customer.getCustLevel()));
+			criteria.add(Restrictions.eq("dictCustLevel.did", customer.getDictCustLevel().getDid()));
 		}
 		if(customer.getCustSource()!=null && !"".equals(customer.getCustSource()))
 		{
 			criteria.add(Restrictions.eq("custSource", customer.getCustSource()));
 		}
 		return (List<Customer>) this.getHibernateTemplate().findByCriteria(criteria);
+	}
+
+	//查询所有级别
+	public List<Dict> findAllDictLevel() {
+		return (List<Dict>) this.getHibernateTemplate().find("from Dict");
+	}
+
+	//根据客户来源统计
+	public List findCountSource() {
+		// 因为写复杂语句，建议直接调用底层sql实现
+		//SQLQuery对象
+		//1.得到sessionFactory对象
+		Session session = this.getSessionFactory().getCurrentSession();//与本地线程绑定的session
+		String sql = "select count(*) as num,custSource from t_customer group by custSource";
+		//2.创建SQLQuery对象
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		/*
+		 * 之前的做法是放到实体类对象里面，
+		 * sqlQuery.addEntity(实体类class);
+		 * 但是现在返回值里面只有两个字段，一个是num，一个是名称,
+		 * 所以把返回数据装换成map结构
+		 */
+		sqlQuery.setResultTransformer(Transformers.aliasToBean(HashMap.class));
+		//调用方法得到结果
+		List list = sqlQuery.list();
+		
+		return list;
+	}
+
+	//根据客户级别进行查询
+	public List findCountLevel() {
+		String sql = "select c.num,d.dname from "
+				+ "(select count(*) as num, custLevel from t_customer group by custLevel) c,"
+				+ "t_dict d "
+				+ "where c.custLevel=d.did";
+		Session session = this.getSessionFactory().getCurrentSession();
+		//创建SQLQuery对象
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		//得到结果
+		//转换map结构
+		sqlQuery.setResultTransformer(Transformers.aliasToBean(HashMap.class));
+		
+		return sqlQuery.list();
 	}
 
 }

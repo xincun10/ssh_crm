@@ -3,6 +3,7 @@ package com.zcy.dao;
 import java.util.List;
 
 import com.zcy.entity.Customer;
+import com.zcy.entity.Dict;
 
 public interface CustomerDao extends BaseDao<Customer>{
 
@@ -23,5 +24,11 @@ public interface CustomerDao extends BaseDao<Customer>{
 	List<Customer> findCondition(Customer customer);
 
 	List<Customer> findMoreCondition(Customer customer);
+
+	List<Dict> findAllDictLevel();
+
+	List findCountSource();
+
+	List findCountLevel();
 
 }

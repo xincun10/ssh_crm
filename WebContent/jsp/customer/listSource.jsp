@@ -25,7 +25,7 @@
 </HEAD>
 <BODY>
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/customerServlet?method=list"
+		action="${pageContext.request.contextPath }/customer_listCondition.action"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -48,7 +48,7 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：客户管理 &gt; 客户列表</TD>
+								<TD class=manageHead>当前位置：统计分析 &gt; 客户来源</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -82,29 +82,43 @@
 											<TBODY>
 												<TR
 													style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
-													<TD>客户名称</TD>
-													<TD>客户级别</TD>
 													<TD>客户来源</TD>
-								
-													<TD>电话</TD>
-													<TD>手机</TD>
-													<TD>操作</TD>
+													<TD>数量</TD>
 												</TR>
-	<c:forEach items="${pageBean.list }" var="customer">
-	<TR
-		style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-		<TD>${customer.custName }</TD>
-		<TD>${customer.dictCustLevel.dname }</TD>
-		<TD>${customer.custSource }</TD>
-	
-		<TD>${customer.custPhone }</TD>
-		<TD>${customer.custMobile }</TD>
-		<TD>
-		
-		</TD>
-	</TR>
-	
-	</c:forEach> 
+												<c:forEach items="${list }" var="map">
+												<TR
+													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+													<TD>${map.custSource }</TD>
+													<TD>${map.num }</TD>
+												</TR>
+												
+												</c:forEach> 
+			
+			<%--  <s:iterator value="list" var="cus">
+				<TR
+				style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+					<TD>
+						<s:property value="#cus.custName"/>
+					</TD>
+					<TD>
+						<s:property value="#cus.custLevel"/>
+					</TD>
+					<TD>
+						<s:property value="#cus.custSource"/>
+					</TD>
+				
+					<TD>
+						<s:property value="#cus.custPhone"/>
+					</TD>
+					<TD>
+						<s:property value="#cus.custMobile"/>
+					</TD>
+			<TD>
+				<a href="${pageContext.request.contextPath }/customer_delete.action?cid=<s:property value="#cus.cid"/>">删除</a>
+			</TD>
+				</TR>
+			</s:iterator>  --%>
+
 											</TBODY>
 										</TABLE>
 									</TD>
@@ -112,30 +126,15 @@
 								
 								<TR>
 									<TD><SPAN id=pagelink>
-<DIV
-	style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-	共[<B>${pageBean.totalCount}</B>]条记录,共[<B>${pageBean.totalPage}</B>]页
-	,当前第[<b>${pageBean.currentPage}</b>]页
-	
-<!-- 
-	当前页-1 
-	判断如果第一页，没有前一页
-	如果最后一页，没有后一页
- -->
-<c:if test="${pageBean.currentPage!=1}">
-	[<A href="${pageContext.request.contextPath }/customer_listPage.action?currentPage=${pageBean.currentPage-1}">前一页</A>]
-</c:if>
-
-<!-- 
-	当前页+1 
- -->
-<c:if test="${pageBean.currentPage!=pageBean.totalPage}">
-	[<A href="${pageContext.request.contextPath }/customer_listPage.action?currentPage=${pageBean.currentPage+1}">后一页</A>] 
-	
-</c:if>
-
-	
-</DIV>
+											<DIV
+												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
+												共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页
+												,当前第[<b>${page}</b>]页
+												[<A href="javascript:to_page(${page-1})">前一页</A>]
+												[<A href="javascript:to_page(${page+1})">后一页</A>] 
+												
+												
+											</DIV>
 									</SPAN></TD>
 								</TR>
 							</TBODY>

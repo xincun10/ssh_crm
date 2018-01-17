@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zcy.dao.CustomerDao;
 import com.zcy.entity.Customer;
+import com.zcy.entity.Dict;
 import com.zcy.entity.PageBean;
 
 @Transactional
@@ -85,5 +86,18 @@ public class CustomerService {
 	public List<Customer> findMoreCondition(Customer customer) {
 		// TODO Auto-generated method stub
 		return customerDao.findMoreCondition(customer);
+	}
+
+	public List<Dict> findAllDictLevel() {
+		// TODO Auto-generated method stub
+		return customerDao.findAllDictLevel();
+	}
+
+	public List findCountSource() {
+		return customerDao.findCountSource();
+	}
+
+	public List findCountLevel() {
+		return customerDao.findCountLevel();
 	}
 }

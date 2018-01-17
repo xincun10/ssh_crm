@@ -13,7 +13,7 @@
 			<generator class="native"></generator>
 		</id>
 		<property name="custName"></property>
-		<property name="custLevel"></property>
+		<!-- <property name="custLevel"></property> -->
 		<property name="custSource"></property>
 		<property name="custPhone"></property>
 		<property name="custMobile"></property>
@@ -29,6 +29,10 @@
 			<key column="cvid"></key>
 			<one-to-many class="com.zcy.entity.Visit"/>
 		</set>
+		
+		<!-- 所属级别 -->
+		<many-to-one name="dictCustLevel" class="com.zcy.entity.Dict" column="custLevel">
+		</many-to-one>
 	</class>
 </hibernate-mapping>
 

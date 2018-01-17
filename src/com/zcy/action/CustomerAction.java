@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.zcy.entity.Customer;
+import com.zcy.entity.Dict;
 import com.zcy.entity.PageBean;
 import com.zcy.service.CustomerService;
 
@@ -23,9 +24,28 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return customer;
 	}
 	
+	//根据来源统计
+	public String countSource()
+	{
+		List list = customerService.findCountSource();
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "countSource";
+	}
+	
+	//根据级别统计
+	public String countLevel()
+	{
+		List list = customerService.findCountLevel();
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return "countLevel";
+	}
+	
 	//到客户信息查询页面
 	public String toSelectCustomerPage()
 	{
+		//查询所有级别
+		List<Dict> listDict = customerService.findAllDictLevel();
+		ServletActionContext.getRequest().setAttribute("listDict", listDict);
 		return "toSelectCustomerPage";
 	}
 	
@@ -40,6 +60,9 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	//1.到添加页面
 	public String toAddPage()
 	{
+		//查询所有级别
+		List<Dict> listDict = customerService.findAllDictLevel();
+		ServletActionContext.getRequest().setAttribute("listDict", listDict);
 		return "toAddPage";
 	}
 	//2.添加的方法
